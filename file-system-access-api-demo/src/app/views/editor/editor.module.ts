@@ -8,6 +8,7 @@ import { EditorRoutingModule } from '@views/editor/editor.routing';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { TextEditorActionsModule } from '@modules/text-editor-actions/text-editor-actions.module';
+import { FileSystemApiWrapperServiceModule } from '@services/file-system-access-wrapper/file-system-api-wrapper.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { TextEditorActionsModule } from '@modules/text-editor-actions/text-edito
     MatToolbarModule,
     MatIconModule,
     TextEditorActionsModule,
+    FileSystemApiWrapperServiceModule,
   ],
   declarations: [EditorViewComponent],
 })

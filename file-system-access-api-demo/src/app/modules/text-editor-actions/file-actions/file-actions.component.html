@@ -2,6 +2,6 @@
 <mat-menu #menu="matMenu">
   <button mat-menu-item>new</button>
   <button mat-menu-item (click)="handleDirectoryOpen()">open folder</button>
-  <button mat-menu-item>save</button>
+  <button mat-menu-item (click)="saveChanges.emit()">save</button>
   <button mat-menu-item>save as</button>
 </mat-menu>

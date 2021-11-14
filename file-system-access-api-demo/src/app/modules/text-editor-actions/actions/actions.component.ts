@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
@@ -13,10 +12,8 @@ import { DirectoryEntry } from '@modules/text-editor-actions/types';
   styleUrls: ['./actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActionsComponent implements OnInit {
+export class ActionsComponent {
   @Output() folderEntries = new EventEmitter<DirectoryEntry[]>();
+  @Output() saveChanges = new EventEmitter<void>();
 
-  constructor() {}
-
-  ngOnInit(): void {}
 }

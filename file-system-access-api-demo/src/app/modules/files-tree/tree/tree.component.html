@@ -1,24 +1,24 @@
 <div class="tree">
-  <div *ngFor="let file of files$ | async" trackBy="trackBy">
-    <button mat-button (click)="onClick(file)">
-      <mat-icon *ngIf="file.fileHandles">
-        {{
-          file.fileHandles && file.collapsed
-            ? "expand_more"
-            : "chevron_right"
-        }}
-      </mat-icon>
-      {{ file.name }}
-    </button>
+  <ul>
+    <li *ngFor="let file of files$ | async" trackBy="trackBy">
+      <button mat-button (click)="onClick(file)">
+        <mat-icon *ngIf="file.fileHandles">
+          {{
+            file.fileHandles && !file.collapsed
+              ? "expand_more"
+              : "chevron_right"
+          }}
+        </mat-icon>
+        {{ file.name }}
+      </button>
 
-    <div
-      class="sub-tree"
-      *ngIf="!file.collapsed && file.fileHandles"
-    >
-      <fsa-files-tree
-        [isSubtree]="true"
-        [subTreeFiles]="file.fileHandles"
-      ></fsa-files-tree>
-    </div>
-  </div>
+      <div class="sub-tree" *ngIf="file.fileHandles && !file.collapsed">
+        <fsa-files-tree
+          (onEditFile)="onEditFile.emit($event)"
+          [isSubtree]="true"
+          [subTreeFiles]="file.fileHandles"
+        ></fsa-files-tree>
+      </div>
+    </li>
+  </ul>
 </div>

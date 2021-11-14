@@ -22,11 +22,11 @@ import { FileSystemHandle, TreeFile } from '../types';
 export class TreeComponent implements OnChanges {
   readonly files$ = new BehaviorSubject<TreeFile[]>([]);
 
-  @Output() editFile = new EventEmitter<FileSystemHandle>();
+  @Output() onEditFile = new EventEmitter<any>();
 
   @Input() files: DirectoryEntry[] | null = [];
   @Input() subTreeFiles: FileSystemHandle[] = [];
-  @Input() isSubtree: boolean = false;
+  @Input() isSubtree = false;
 
   constructor(
     private readonly handleFileHandlesService: HandleFileHandlesService,
@@ -47,22 +47,22 @@ export class TreeComponent implements OnChanges {
 
   onClick(file: TreeFile) {
     if (file.fileHandles) {
-      this.handleFileHandlesService.setIsCollapsed(
-        !file.collapsed,
-        file.id,
-        this.files$.getValue()
-      );
-      this.cdr.markForCheck();
+      this.setIsCollapsed(file);
     } else {
-      this.openFile(file);
+      this.onEditFile.emit(file.handle);
     }
+  }
+
+  setIsCollapsed(file: TreeFile) {
+    this.handleFileHandlesService.setIsCollapsed(
+      !file.collapsed,
+      file.id,
+      this.files$.getValue()
+    );
+    this.cdr.markForCheck();
   }
 
   trackBy(_: number, file: FileSystemHandle) {
     return file.id;
-  }
-
-  private openFile(file: TreeFile) {
-    this.editFile.emit(file.handle);
   }
 }
