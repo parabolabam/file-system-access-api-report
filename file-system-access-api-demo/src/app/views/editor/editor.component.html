@@ -1,0 +1,7 @@
+<fsa-default-layout>
+  <mat-toolbar header>
+    <fsa-text-editor-actions (folderEntries)="handleFolderEntries($event)"></fsa-text-editor-actions>
+  </mat-toolbar>
+  <fsa-files-tree [files]="currentFolderEntries$ | async" right-side></fsa-files-tree>
+  <fsa-text-editor main></fsa-text-editor>
+</fsa-default-layout>

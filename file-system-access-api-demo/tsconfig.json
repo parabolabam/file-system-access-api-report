@@ -25,7 +25,8 @@
       "@components/*": ["app/components/*"],
       "@services/*": ["app/services/*"],
       "@env/*": ["environments/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@layouts/*": ["layouts/*"]
     }
   },
   "angularCompilerOptions": {

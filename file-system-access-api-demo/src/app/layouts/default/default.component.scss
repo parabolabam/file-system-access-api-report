@@ -1,0 +1,30 @@
+.layout-container {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 150px auto 150px;
+  grid-template-rows: 60px 1fr 60px;
+  grid-gap: 1em;
+  flex-grow: 1;
+}
+
+.container {
+  padding: 1em;
+}
+
+.main {
+  grid-column: 2 / -1;
+}
+
+.side-bar {
+  grid-template-rows: 2 / 0;
+}
+
+header,
+footer {
+  grid-column: 1 / -1;
+}
