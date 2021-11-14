@@ -1,7 +1,8 @@
-
 export type FileSystemHandle = {
   path: string;
   name: string;
-  isDirectory: boolean;
+  id: string;
   fileHandles?: FileSystemHandle[];
 };
+
+export type TreeFile = FileSystemHandle & { collapsed?: boolean };

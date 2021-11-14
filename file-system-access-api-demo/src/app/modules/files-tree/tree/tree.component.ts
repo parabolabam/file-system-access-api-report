@@ -1,15 +1,14 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Input,
   OnChanges,
-  SimpleChanges,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HandleFileHandlesService } from '@modules/files-tree/services/handle-file-handles.service';
 import { DirectoryEntry } from '@modules/text-editor-actions/types';
-import { FileSystemHandle } from '../types';
+import { FileSystemHandle, TreeFile } from '../types';
 
 @Component({
   selector: 'fsa-files-tree',
@@ -19,15 +18,15 @@ import { FileSystemHandle } from '../types';
   providers: [HandleFileHandlesService],
 })
 export class TreeComponent implements OnChanges {
-  readonly files$ = new BehaviorSubject<FileSystemHandle[]>([]);
-  readonly notCollapsed$ = new BehaviorSubject<boolean>(true);
+  readonly files$ = new BehaviorSubject<TreeFile[]>([]);
 
   @Input() files: DirectoryEntry[] | null = [];
   @Input() subTreeFiles: FileSystemHandle[] = [];
   @Input() isSubtree: boolean = false;
 
   constructor(
-    private readonly handleFileHandlesService: HandleFileHandlesService
+    private readonly handleFileHandlesService: HandleFileHandlesService,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   async ngOnChanges() {
@@ -42,15 +41,20 @@ export class TreeComponent implements OnChanges {
     }
   }
 
-  onClick(file: FileSystemHandle) {
+  onClick(file: TreeFile) {
     if (file.fileHandles) {
-      this.notCollapsed$.next(!this.notCollapsed$.getValue());
+      this.handleFileHandlesService.setIsCollapsed(
+        !file.collapsed,
+        file.id,
+        this.files$.getValue()
+      );
+      this.cdr.markForCheck();
     } else {
       // TODO: implement logic of opening a file
     }
   }
 
   trackBy(_: number, file: FileSystemHandle) {
-    return file.name;
+    return file.id;
   }
 }

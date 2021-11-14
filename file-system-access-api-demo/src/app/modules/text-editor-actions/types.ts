@@ -1,1 +1,1 @@
-export type DirectoryEntry = [string, any];
+export type DirectoryEntry = [string, any, string];
