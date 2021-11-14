@@ -32,7 +32,7 @@ export class HandleFileHandlesService {
   ): Promise<FileSystemHandle> {
     // @ts-ignore
     const isDirectory = dirHandle[1]?.constructor === FileSystemDirectoryHandle;
-    let result = { id: dirHandle[2], path: '', name: dirHandle[0] };
+    let result = { id: `${Math.random() * 10e5}`, path: '', name: dirHandle[0], handle: dirHandle[1] };
 
     if (isDirectory) {
       const subResult = [];
@@ -44,6 +44,7 @@ export class HandleFileHandlesService {
         id: `${dirHandle.toString()}-${Math.random() * 10e5}`,
         path: '',
         name: dirHandle[0],
+        handle: dirHandle[1],
         fileHandles: subResult,
       });
     } else {

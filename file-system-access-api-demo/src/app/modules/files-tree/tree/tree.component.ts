@@ -4,6 +4,8 @@ import {
   Input,
   OnChanges,
   ChangeDetectorRef,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HandleFileHandlesService } from '@modules/files-tree/services/handle-file-handles.service';
@@ -19,6 +21,8 @@ import { FileSystemHandle, TreeFile } from '../types';
 })
 export class TreeComponent implements OnChanges {
   readonly files$ = new BehaviorSubject<TreeFile[]>([]);
+
+  @Output() editFile = new EventEmitter<FileSystemHandle>();
 
   @Input() files: DirectoryEntry[] | null = [];
   @Input() subTreeFiles: FileSystemHandle[] = [];
@@ -50,11 +54,15 @@ export class TreeComponent implements OnChanges {
       );
       this.cdr.markForCheck();
     } else {
-      // TODO: implement logic of opening a file
+      this.openFile(file);
     }
   }
 
   trackBy(_: number, file: FileSystemHandle) {
     return file.id;
+  }
+
+  private openFile(file: TreeFile) {
+    this.editFile.emit(file.handle);
   }
 }
