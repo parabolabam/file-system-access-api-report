@@ -18,6 +18,8 @@ import { UidService } from '@services/uid/uid.service';
 export class FileActionsComponent {
   @Output() folderEntries = new EventEmitter<DirectoryEntry[]>();
   @Output() saveChanges = new EventEmitter();
+  @Output() saveAs = new EventEmitter();
+  @Output() openFile = new EventEmitter();
 
   constructor(
     readonly openDirectoryWrapperService: OpenDirectoryWrapperService,

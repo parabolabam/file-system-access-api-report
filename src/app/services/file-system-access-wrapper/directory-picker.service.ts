@@ -7,8 +7,16 @@ export class OpenDirectoryWrapperService {
 
   constructor(@Inject(DOCUMENT) private readonly doc: Document) {}
 
+  async getNewFileHandle(opts = {}) {
+    return await this.globalThis?.showSaveFilePicker(opts);
+  }
+
   async openDirectoryPicker() {
     return await this.globalThis?.showDirectoryPicker();
+  }
+
+  async openFile() {
+    return await this.globalThis?.showOpenFilePicker()[0];
   }
 
   async getFile(fileHandle: any) {
@@ -28,6 +36,13 @@ export class OpenDirectoryWrapperService {
   async writeToFile(content: string, filehandle: any) {
     const writableStream = await filehandle.createWritable();
 
-    return await writableStream.write(content);
+    await writableStream.write(content);
+
+    return await writableStream.close();
+  }
+
+  async saveAs(content: string) {
+    const fileHande = await this.getNewFileHandle();
+    await this.writeToFile(content, fileHande);
   }
 }

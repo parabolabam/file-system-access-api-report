@@ -3,6 +3,12 @@
     <fsa-text-editor-actions
       (folderEntries)="handleFolderEntries($event)"
       (saveChanges)="saveChanges$.next()"
+      (openFile)="openFile()"
+      (saveAs)="
+        openDirectoryWrapperService.saveAs(
+          this.changedContent$.getValue() || ''
+        )
+      "
     ></fsa-text-editor-actions>
   </mat-toolbar>
   <fsa-files-tree

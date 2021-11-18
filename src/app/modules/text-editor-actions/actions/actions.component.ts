@@ -15,5 +15,6 @@ import { DirectoryEntry } from '@modules/text-editor-actions/types';
 export class ActionsComponent {
   @Output() folderEntries = new EventEmitter<DirectoryEntry[]>();
   @Output() saveChanges = new EventEmitter<void>();
-
+  @Output() saveAs = new EventEmitter();
+  @Output() openFile = new EventEmitter();
 }
