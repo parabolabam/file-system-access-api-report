@@ -1,9 +1,0 @@
-<button mat-button [matMenuTriggerFor]="menu">file</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>new</button>
-  <button mat-menu-item (click)="openFile.emit()">open file</button>
-
-  <button mat-menu-item (click)="handleDirectoryOpen()">open folder</button>
-  <button mat-menu-item (click)="saveChanges.emit()">save</button>
-  <button mat-menu-item (click)="saveAs.emit()">save as</button>
-</mat-menu>

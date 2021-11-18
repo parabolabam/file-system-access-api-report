@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkfile_system_access_api_demo=self.webpackChunkfile_system_access_api_demo||[]).push([[592],{852:(c,u,_)=>{_.d(u,{X:()=>s});var o=_(6019),a=_(3668);let s=(()=>{class e{}return e.\u0275fac=function(l){return new(l||e)},e.\u0275mod=a.oAB({type:e}),e.\u0275inj=a.cJS({imports:[[o.ez]]}),e})()}}]);
